@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using GameLibrary.Server.Data.Repositories;
 using GameLibrary.Server.Models;
+using System.Text.Json;
 
 namespace GameLibrary.Server.Controllers
 {
@@ -9,11 +10,11 @@ namespace GameLibrary.Server.Controllers
     [Route("[controller]")]
     public class TestController : ControllerBase
     {
-        private readonly IDataGameLibrary _dataTrailblazer;
+        private readonly IDataGameLibrary _dataGameLibrary;
 
-        public TestController(IDataGameLibrary dataTrailblazer)
+        public TestController(IDataGameLibrary dataGameLibrary)
         {
-            _dataTrailblazer = dataTrailblazer;
+            _dataGameLibrary = dataGameLibrary;
         }
 
         [HttpGet("test")]
@@ -21,10 +22,22 @@ namespace GameLibrary.Server.Controllers
         {
             try
             {
-                //test
-                var data = await _dataTrailblazer.Test();
+                List<Game> games = JsonSerializer.Deserialize<List<Game>>(System.IO.File.ReadAllText(@"C:\games.json"));
 
-                return Ok(data);
+                foreach(var game in games)
+                {
+                    try
+                    {
+                        await _dataGameLibrary.Populate(game);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+                
+
+                return Ok(games);
             }
             catch (Exception ex)
             {
