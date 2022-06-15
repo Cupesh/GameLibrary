@@ -1,4 +1,4 @@
-namespace GameLibrary.Client.Resources.Themes;
+namespace GameLibrary.Client.Resources.Styles;
 
 public partial class MyTheme : ResourceDictionary
 {

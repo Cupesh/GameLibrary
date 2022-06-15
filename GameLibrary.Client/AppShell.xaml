@@ -4,11 +4,24 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:GameLibrary.Client.Views"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Flyout">
 
-    <ShellContent
-        Title="Main Menu"
-        ContentTemplate="{DataTemplate local:MainMenu}"
-        Route="MainMenu" />
+    <FlyoutItem Title="My Games">
+        
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:MainMenu}"/>
+        </Tab>
+        
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Settings">
+        
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"
+                          Route="SettingsPage"
+                          />
+        </Tab>
+        
+    </FlyoutItem>
 
 </Shell>

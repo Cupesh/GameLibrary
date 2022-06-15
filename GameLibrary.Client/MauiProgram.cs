@@ -24,10 +24,12 @@ public static class MauiProgram
 		// views
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<MainMenu>();
+        builder.Services.AddTransient<SettingsPage>();
 
         //view models
         builder.Services.AddTransient<MainPageViewModel>();
         builder.Services.AddTransient<MainMenuViewModel>();
+        builder.Services.AddTransient<SettingsViewModel>();
 
         builder.Services.AddHttpClient<ServerAPIClient>(client => client.BaseAddress = new Uri("https://localhost:7031"));
 
