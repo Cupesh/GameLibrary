@@ -1,6 +1,6 @@
 using GameLibrary.Client.ViewModels;
 
-namespace GameLibrary.Client.Views;
+namespace GameLibrary.Client.Pages;
 
 public partial class SettingsPage : ContentPage
 {

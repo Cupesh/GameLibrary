@@ -1,6 +1,6 @@
 ﻿using GameLibrary.Client.Services;
 using GameLibrary.Client.ViewModels;
-using GameLibrary.Client.Views;
+using GameLibrary.Client.Pages;
 
 namespace GameLibrary.Client;
 
@@ -23,13 +23,15 @@ public static class MauiProgram
 
 		// views
         builder.Services.AddTransient<MainPage>();
-        builder.Services.AddTransient<MainMenu>();
+        builder.Services.AddTransient<MainMenuPage>();
         builder.Services.AddTransient<SettingsPage>();
+        builder.Services.AddTransient<MyGamesPage>();
 
         //view models
         builder.Services.AddTransient<MainPageViewModel>();
         builder.Services.AddTransient<MainMenuViewModel>();
         builder.Services.AddTransient<SettingsViewModel>();
+        builder.Services.AddTransient<MyGamesViewModel>();
 
         builder.Services.AddHttpClient<ServerAPIClient>(client => client.BaseAddress = new Uri("https://localhost:7031"));
 

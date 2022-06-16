@@ -3,13 +3,19 @@
     x:Class="GameLibrary.Client.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:GameLibrary.Client.Views"
+    xmlns:local="clr-namespace:GameLibrary.Client.Pages"
     Shell.FlyoutBehavior="Flyout">
+
+    <ShellContent Route="MainMenu"
+                  ContentTemplate="{DataTemplate local:MainMenuPage}">
+            
+    </ShellContent>
 
     <FlyoutItem Title="My Games">
         
         <Tab>
-            <ShellContent ContentTemplate="{DataTemplate local:MainMenu}"/>
+            <ShellContent ContentTemplate="{DataTemplate local:MyGamesPage}"
+                          Route="MyGamesPage"/>
         </Tab>
         
     </FlyoutItem>
