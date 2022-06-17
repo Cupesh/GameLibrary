@@ -23,7 +23,7 @@
     <FlyoutItem Title="Settings">
         
         <Tab>
-            <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"
                           Route="SettingsPage"
                           />
         </Tab>

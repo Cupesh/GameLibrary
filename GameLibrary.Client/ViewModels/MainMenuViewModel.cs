@@ -1,4 +1,5 @@
 ﻿using GameLibrary.Client.Services;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,13 @@ namespace GameLibrary.Client.ViewModels
         public MainMenuViewModel(IDataService dataService)
         {
             DataService = dataService;
+            GetUserProfile();
+        }
+
+        public async Task GetUserProfile()
+        {
+            var path = Path.Combine(FileSystem.Current.AppDataDirectory, "GameLibraryUserSettings.json");
+            File.Create(path);
         }
     }
 }

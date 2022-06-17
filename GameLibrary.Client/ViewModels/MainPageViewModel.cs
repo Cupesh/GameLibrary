@@ -17,7 +17,7 @@ namespace GameLibrary.Client.ViewModels
         public MainPageViewModel(IDataService dataService)
         {
             DataService = dataService;
-            BtnText = "Click Me";
+            BtnText = Preferences.Get("username", "didn't work");
         }
 
         public async void OnClicked()
