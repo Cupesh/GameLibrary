@@ -1,0 +1,2 @@
+Select font
+Assign colors and style to labels, pickers, buttons
