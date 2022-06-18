@@ -13,13 +13,15 @@ namespace GameLibrary.Client.ViewModels
         public MainMenuViewModel(IDataService dataService)
         {
             DataService = dataService;
-            GetUserProfile();
+            CheckUserProfile();
         }
 
-        public async Task GetUserProfile()
+        private async void CheckUserProfile()
         {
-            var path = Path.Combine(FileSystem.Current.AppDataDirectory, "GameLibraryUserSettings.json");
-            File.Create(path);
+            if (!Preferences.ContainsKey("UserName"))
+            {
+                await Shell.Current.GoToAsync("signup");
+            }
         }
     }
 }

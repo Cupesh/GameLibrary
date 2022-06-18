@@ -27,12 +27,14 @@ public static class MauiProgram
         builder.Services.AddTransient<MainMenuPage>();
         builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddTransient<MyGamesPage>();
+        builder.Services.AddTransient<SignUpPage>();
 
         //view models
         builder.Services.AddTransient<MainPageViewModel>();
         builder.Services.AddTransient<MainMenuViewModel>();
         builder.Services.AddTransient<SettingsViewModel>();
         builder.Services.AddTransient<MyGamesViewModel>();
+        builder.Services.AddTransient<SignUpViewModel>();
 
         builder.Services.AddHttpClient<ServerAPIClient>(client => client.BaseAddress = new Uri("https://localhost:7031"));
 

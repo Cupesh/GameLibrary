@@ -65,6 +65,9 @@
 	  <MauiXaml Update="Pages\MyGamesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\SignUpPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\MyTheme.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

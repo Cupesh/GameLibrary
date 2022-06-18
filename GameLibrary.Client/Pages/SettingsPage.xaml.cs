@@ -8,5 +8,5 @@ public partial class SettingsPage : ContentPage
 	{
         BindingContext = vm;
         InitializeComponent();
-	}
+    }
 }

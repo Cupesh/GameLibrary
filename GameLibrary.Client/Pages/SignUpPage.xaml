@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameLibrary.Client.Pages.SignUpPage">
+    
+    <StackLayout BackgroundColor="{StaticResource Black}">
+
+        <HorizontalStackLayout>
+
+            <Label Text="User Name"/>
+            <Entry Text="{Binding EntryUserName}"/>
+
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout>
+
+            <Label Text="Collecting games from which region(s)?"/>
+            <Picker Title="Select Region"
+                    x:Name="regionPicker"
+                    SelectedItem="{Binding PickerRegion}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>PAL</x:String>
+                        <x:String>NTSC-U</x:String>
+                        <x:String>NTSC-J</x:String>
+                        <x:String>All</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Label Text="{Binding Source={x:Reference regionPicker}, Path=SelectedItem}"/>
+
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout>
+
+            <Button Text="Confirm"
+                    Command="{Binding OnConfirmClicked}"/>
+
+        </HorizontalStackLayout>
+
+        <VerticalStackLayout>
+
+            <Label Text="{Binding LabelUserNameResult}"/>
+            <Label Text="{Binding LabelRegionResult}"/>
+
+        </VerticalStackLayout>
+        
+    </StackLayout>
+    
+</ContentPage>
