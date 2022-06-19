@@ -29,6 +29,7 @@
 
     <Style TargetType="Label">
         <Setter Property="BackgroundColor" Value="{StaticResource PSConPurpleBlue}"/>
+        <Setter Property="FontFamily" Value="GameStationDisplay"/>
     </Style>
     
 </ResourceDictionary>

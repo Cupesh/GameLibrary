@@ -16,6 +16,7 @@ namespace GameLibrary.Client.ViewModels
         public string LabelRegionResult { get; set; }
 
         public ICommand OnConfirmClicked { get { return new Command(() => OnConfirm()); } }
+        public ICommand OnBackButtonPressed { get { return new Command(() => BackButtonPressed()); } }
 
         public SignUpViewModel(IDataService dataService)
         {
@@ -29,6 +30,11 @@ namespace GameLibrary.Client.ViewModels
 
             RaisePropertyChanged(nameof(LabelUserNameResult));
             RaisePropertyChanged(nameof(LabelRegionResult));
+        }
+
+        public bool BackButtonPressed()
+        {
+            return false;
         }
     }
 }

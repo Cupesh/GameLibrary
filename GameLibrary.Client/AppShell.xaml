@@ -4,30 +4,34 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:GameLibrary.Client.Pages"
-    Shell.FlyoutBehavior="Flyout">
+    FlyoutBehavior="{OnIdiom Phone=Disabled, Default=Locked}">
 
     <ShellContent Route="MainMenu"
                   ContentTemplate="{DataTemplate local:MainMenuPage}">
-            
     </ShellContent>
-
     <FlyoutItem Title="My Games">
-        
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MyGamesPage}"
                           Route="MyGamesPage"/>
         </Tab>
-        
     </FlyoutItem>
-    
     <FlyoutItem Title="Settings">
-        
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}"
-                          Route="SettingsPage"
-                          />
+                          Route="SettingsPage"/>
         </Tab>
-        
     </FlyoutItem>
+
+    <TabBar x:Name="PhoneTabs">
+        <Tab Title="Home">
+            <ShellContent ContentTemplate="{DataTemplate local:MainMenuPage}"/>
+        </Tab>
+        <Tab Title="Favorites">
+            <ShellContent ContentTemplate="{DataTemplate local:MyGamesPage}"/>
+        </Tab>
+        <Tab Title="Map">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+    </TabBar>
 
 </Shell>
