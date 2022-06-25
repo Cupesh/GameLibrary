@@ -8,8 +8,8 @@ namespace GameLibrary.Client
         {
             InitializeComponent();
 
-            //if (DeviceInfo.Idiom == DeviceIdiom.Phone)
-            //    Shell.Current.CurrentItem = PhoneTabs;
+            if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+                Shell.Current.CurrentItem = PhoneTabs;
 
             Routing.RegisterRoute("signup", typeof(SignUpPage));
         }

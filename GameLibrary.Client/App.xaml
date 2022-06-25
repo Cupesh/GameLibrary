@@ -36,28 +36,15 @@
             <!-- Phone -->
             <TabBar x:Name="PhoneTabs" IsVisible="{OnIdiom Default=False, Phone=True}">
                 <Tab Title="Home" >
-                    <ShellContent ContentTemplate="{DataTemplate local:MyGamesPage}"/>
+                    <ShellContent ContentTemplate="{DataTemplate local:MainMenuPage}"/>
                 </Tab>
                 <Tab Title="Favorites" >
                     <ShellContent ContentTemplate="{DataTemplate local:MyGamesPage}"/>
                 </Tab>
                 <Tab Title="Map" >
-                    <ShellContent ContentTemplate="{DataTemplate local:MyGamesPage}"/>
-                </Tab>
-                <Tab Title="Settings" >
-                    <ShellContent ContentTemplate="{DataTemplate local:MyGamesPage}"/>
+                    <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
                 </Tab>
             </TabBar>
-
-            <Shell.ItemTemplate>
-                <DataTemplate>
-                    <Grid
-                        RowDefinitions="68" HeightRequest="68">
-
-                    </Grid>
-                </DataTemplate>
-
-            </Shell.ItemTemplate>
 
         </Shell>
 
