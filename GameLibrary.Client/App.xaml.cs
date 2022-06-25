@@ -8,9 +8,10 @@ namespace GameLibrary.Client
         {
             InitializeComponent();
 
-            Routing.RegisterRoute("signup", typeof(SignUpPage));
+            //if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+            //    Shell.Current.CurrentItem = PhoneTabs;
 
-            MainPage = new AppShell();
+            Routing.RegisterRoute("signup", typeof(SignUpPage));
         }
     }
 }

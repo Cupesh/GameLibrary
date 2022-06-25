@@ -4,11 +4,11 @@
              x:Class="GameLibrary.Client.Pages.SignUpPage"
              Shell.FlyoutBehavior="Disabled">
 
-    <Shell.BackButtonBehavior>
+    <!--<Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding OnBackButtonPressed}">
             
         </BackButtonBehavior>
-    </Shell.BackButtonBehavior>
+    </Shell.BackButtonBehavior>-->
 
     <StackLayout BackgroundColor="{StaticResource Black}">
 
