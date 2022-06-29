@@ -17,19 +17,46 @@
 
     <Color x:Key="Grey">#858484</Color>
     <Color x:Key="Black">#2b2b2b</Color>
+    <Color x:Key="White">white</Color>
     
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
        
         <!--Title bar colour-->
-        <Setter Property="Shell.BackgroundColor" Value="{StaticResource Grey}" />
+        <Setter Property="Shell.BackgroundColor" Value="Black" />
         <!--Title bar font color-->
         <Setter Property="Shell.TitleColor"  Value="{StaticResource PSConGreen}" />
 
     </Style>
 
     <Style TargetType="Label">
-        <Setter Property="BackgroundColor" Value="{StaticResource PSConPurpleBlue}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Black}"/>
         <Setter Property="FontFamily" Value="GameStationDisplay"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource PSConPurpleBlue}"/>
+        <Setter Property="TextColor" Value="{StaticResource White}"/>
+    </Style>
+
+    <Style TargetType="Entry">
+        <Setter Property="Margin" Value="5,10" />
+        <Setter Property="TextColor" Value="{StaticResource PSYellow}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Grey}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="Placeholder" Value="Enter..." />
+    </Style>
+
+    <Style TargetType="Picker">
+        <Setter Property="Margin" Value="5,10" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Grey}" />
+        <Setter Property="TextColor" Value="{StaticResource PSYellow}" />
+        <Setter Property="TitleColor" Value="{StaticResource White}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
     
 </ResourceDictionary>
