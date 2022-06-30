@@ -22,41 +22,48 @@
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
        
         <!--Title bar colour-->
-        <Setter Property="Shell.BackgroundColor" Value="Black" />
+        <Setter Property="Shell.BackgroundColor" Value="DarkBlue" />
         <!--Title bar font color-->
         <Setter Property="Shell.TitleColor"  Value="{StaticResource PSConGreen}" />
 
     </Style>
 
     <Style TargetType="Label">
-        <Setter Property="BackgroundColor" Value="{StaticResource Black}"/>
         <Setter Property="FontFamily" Value="GameStationDisplay"/>
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="TextColor" Value="YellowGreen" />
+        <Setter Property="BackgroundColor" Value="#00FF" />
     </Style>
 
     <Style TargetType="Button">
-        <Setter Property="BackgroundColor" Value="{StaticResource PSConPurpleBlue}"/>
-        <Setter Property="TextColor" Value="{StaticResource White}"/>
+        <Setter Property="BackgroundColor" Value="Purple"/>
+        <Setter Property="TextColor" Value="YellowGreen"/>
+        <Setter Property="BorderWidth" Value="2"/>
+        <Setter Property="BorderColor" Value="YellowGreen"/>
+        <Setter Property="CornerRadius" Value="30"/>
     </Style>
 
     <Style TargetType="Entry">
-        <Setter Property="Margin" Value="5,10" />
-        <Setter Property="TextColor" Value="{StaticResource PSYellow}" />
-        <Setter Property="BackgroundColor" Value="{StaticResource Grey}" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Margin" Value="10,0,0,0" />
+        <Setter Property="TextColor" Value="YellowGreen" />
+        <Setter Property="BackgroundColor" Value="#00FF" />
         <Setter Property="Placeholder" Value="Enter..." />
+        <Setter Property="PlaceholderColor" Value="YellowGreen" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 
     <Style TargetType="Picker">
+        <Setter Property="FontSize" Value="20" />
         <Setter Property="Margin" Value="5,10" />
-        <Setter Property="BackgroundColor" Value="{StaticResource Grey}" />
-        <Setter Property="TextColor" Value="{StaticResource PSYellow}" />
-        <Setter Property="TitleColor" Value="{StaticResource White}" />
+        <Setter Property="BackgroundColor" Value="#00FF" />
+        <Setter Property="TextColor" Value="YellowGreen" />
+        <Setter Property="TitleColor" Value="YellowGreen" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
+        
     </Style>
     
 </ResourceDictionary>
