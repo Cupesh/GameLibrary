@@ -2,6 +2,7 @@
 using GameLibrary.Client.ViewModels;
 using GameLibrary.Client.Pages;
 using GameLibrary.Client.Models;
+using CommunityToolkit.Maui;
 
 namespace GameLibrary.Client;
 
@@ -14,12 +15,13 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                fonts.AddFont("GameStationDisplay-zexG.ttf", "GameStationDisplay");
+                fonts.AddFont("GamestationDisplay-zexG.ttf", "GameStationDisplay");
+                fonts.AddFont("zrnic-rg.ttf", "Zrnic");
 			});
 
-		// services
+        builder.UseMauiApp<App>().UseMauiCommunityToolkit();
+
+        // services
         builder.Services.AddSingleton<IDataService, DataService>();
         builder.Services.AddSingleton<IJsonService, JsonService>();
 

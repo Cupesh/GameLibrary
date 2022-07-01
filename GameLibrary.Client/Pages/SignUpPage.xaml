@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
              x:Class="GameLibrary.Client.Pages.SignUpPage"
              Shell.FlyoutBehavior="Disabled"
              Shell.TabBarIsVisible="False">
@@ -53,37 +54,45 @@
                Grid.ColumnSpan="12"/>
 
         <Label Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="12"
+               TextColor="Red"
+               FontSize="Medium"
+               Text="{Binding ValidationMessage}"/>
+
+        <Label Grid.Row="1"
                Grid.Column="1"
                Grid.ColumnSpan="10"
                Text="CREATE A PROFILE"
-               FontSize="Large"/>
+               FontSize="Title"
+               CharacterSpacing="3"
+               FontAttributes="Bold"
+               TextColor="white"/>
 
         <Entry Grid.Row="2"
-                Grid.Column="2"
-                Grid.ColumnSpan="8"
-                Grid.RowSpan="1"
-                BackgroundColor="#29FF"
-                Text="{Binding EntryUserName}" />
-
-
-        <Frame Grid.Row="4"
                Grid.Column="2"
                Grid.ColumnSpan="8"
-               BackgroundColor="#10FF"
-               BorderColor="white"
-               CornerRadius="30">
-            
-            <Entry Text="{Binding EntryUserName}" />
-            
-        </Frame>
+               Grid.RowSpan="1"
+               Placeholder="Username..."
+               Text="{Binding Username}" 
+               Keyboard="Text">
+        </Entry>
 
+        <Entry Grid.Row="4"
+               Grid.Column="2"
+               Grid.ColumnSpan="8"
+               Placeholder="Password..."
+               Text="{Binding Password}" 
+               IsPassword="True" />
 
         <Picker Grid.Row="6"
                 Grid.Column="2"
                 Grid.ColumnSpan="8"
                 Title="Select Region"
+                TitleColor="WhiteSmoke"
                 x:Name="regionPicker"
-                SelectedItem="{Binding PickerRegion}">
+                SelectedItem="{Binding Region}">
+            
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>PAL</x:String>
@@ -97,8 +106,8 @@
         <Button Grid.Row="9"
                 Grid.Column="3"
                 Grid.ColumnSpan="6"
-                Text="Create Profile"
-                Command="{Binding OnConfirmClicked}"/>
+                Text="CREATE"
+                Command="{Binding OnCreateProfileClicked}" />
 
     </Grid>
 

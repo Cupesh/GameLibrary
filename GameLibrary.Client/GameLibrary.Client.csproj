@@ -51,10 +51,12 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\GamestationDisplay-zexG.ttf" />
+	  <None Remove="Resources\Fonts\zrnic-rg.ttf" />
 	  <None Remove="Resources\Images\p1art.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Maui" Version="1.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
 	</ItemGroup>
 
