@@ -1,2 +1,3 @@
-Select font
-Assign colors and style to labels, pickers, buttons
+Select font DONE
+Assign colors and style to labels, pickers, buttons DONE
+password encryption

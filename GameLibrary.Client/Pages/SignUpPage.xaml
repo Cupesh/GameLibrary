@@ -53,12 +53,19 @@
                Grid.Column="0"
                Grid.ColumnSpan="12"/>
 
+        <ActivityIndicator Grid.Row="8"
+                           Grid.Column="5"
+                           Grid.ColumnSpan="2"
+                           IsRunning="{Binding Loading}"
+                           IsVisible="{Binding Loading}"
+                           Color="Cyan"/>
+
         <Label Grid.Row="0"
                Grid.Column="0"
                Grid.ColumnSpan="12"
                TextColor="Red"
                FontSize="Medium"
-               Text="{Binding ValidationMessage}"/>
+               Text="{Binding ErrorMessage}"/>
 
         <Label Grid.Row="1"
                Grid.Column="1"
@@ -74,7 +81,7 @@
                Grid.ColumnSpan="8"
                Grid.RowSpan="1"
                Placeholder="Username..."
-               Text="{Binding Username}" 
+               Text="{Binding NewUser.UserName}" 
                Keyboard="Text">
         </Entry>
 
@@ -82,7 +89,8 @@
                Grid.Column="2"
                Grid.ColumnSpan="8"
                Placeholder="Password..."
-               Text="{Binding Password}" 
+               Text="{Binding NewUser.Password}"
+               FontFamily="Zrnic"
                IsPassword="True" />
 
         <Picker Grid.Row="6"
@@ -91,7 +99,7 @@
                 Title="Select Region"
                 TitleColor="WhiteSmoke"
                 x:Name="regionPicker"
-                SelectedItem="{Binding Region}">
+                SelectedItem="{Binding NewUser.Region}">
             
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
@@ -107,7 +115,9 @@
                 Grid.Column="3"
                 Grid.ColumnSpan="6"
                 Text="CREATE"
-                Command="{Binding OnCreateProfileClicked}" />
+                Command="{Binding OnCreateProfileClicked}">
+
+        </Button>
 
     </Grid>
 

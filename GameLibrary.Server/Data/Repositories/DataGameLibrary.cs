@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using GameLibrary.Server.Data.Contexts;
 using GameLibrary.Server.Models;
+using GameLibrary.Shared.Models;
 
 namespace GameLibrary.Server.Data.Repositories
 {
@@ -10,13 +11,29 @@ namespace GameLibrary.Server.Data.Repositories
 
         public DataGameLibrary(GameLibraryDataContext context) => _repository = new Repository<GameLibraryDataContext>(context);
 
-        public async Task<List<User>> Test()
-        {
-            var sql = "SELECT UserName FROM tblUsers";
-            var data = await _repository.GetDapperListAsync<User>(sql, null, CommandType.Text);
+        #region User Management
 
-            return data;
+        public async Task<bool> CheckUserNameUniqueness(string userName)
+        {
+            var sql = $"SELECT * FROM tblUsers WHERE UserName = @userName";
+            var par = new { userName };
+            var result = await _repository.GetDapperListAsync<User>(sql, par, CommandType.Text);
+
+            if (result.Count > 0) { return false; }
+            else { return true; }
         }
+
+        public async Task<User> CreateUser(User newUser)
+        {
+            var sql = $"INSERT INTO tblUsers (UserName, Password, Region) VALUES (@userName, @password, @region) " +
+                      $"SELECT * FROM tblUsers WHERE UserName = @userName";
+            var pars = new { userName = newUser.UserName, password = newUser.Password, region = newUser.Region };
+            var result = await _repository.GetDapperListAsync<User>(sql, pars, CommandType.Text);
+
+            return result.First();
+        }
+
+        #endregion
 
         public async Task<List<Game>> Populate(Game game)
         {

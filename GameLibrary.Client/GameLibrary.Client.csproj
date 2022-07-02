@@ -87,4 +87,6 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<Import Project="..\GameLibrary.Shared\GameLibrary.Shared.projitems" Label="Shared" />
+
 </Project>

@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ToDoList.txt = ToDoList.txt
 	EndProjectSection
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GameLibrary.Shared", "GameLibrary.Shared\GameLibrary.Shared.shproj", "{AB2F35C8-5949-46C7-BED7-0387B3120559}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,5 +36,10 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E18E1A4-EA6F-4BF0-B112-1085C9ECCDC2}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		GameLibrary.Shared\GameLibrary.Shared.projitems*{77e8773d-b324-4526-86d6-ff66bc2a49ea}*SharedItemsImports = 5
+		GameLibrary.Shared\GameLibrary.Shared.projitems*{8b9351a1-442a-4b84-a653-5119d38287dc}*SharedItemsImports = 5
+		GameLibrary.Shared\GameLibrary.Shared.projitems*{ab2f35c8-5949-46c7-bed7-0387b3120559}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
