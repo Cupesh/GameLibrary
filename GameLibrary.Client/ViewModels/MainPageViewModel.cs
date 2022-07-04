@@ -17,7 +17,6 @@ namespace GameLibrary.Client.ViewModels
         public MainPageViewModel(IDataService dataService)
         {
             DataService = dataService;
-            BtnText = "Click Me";
         }
 
         public async void OnClicked()

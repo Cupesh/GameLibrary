@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GameLibrary.Client.Resources.Styles.MyTheme">
+
+    <!-- PlayStation logo colours-->
+    <Color x:Key="PSRed">#DF0024</Color>
+    <Color x:Key="PSYellow">#F3C300</Color>
+    <Color x:Key="PSCyan">#00AC9F</Color>
+    <Color x:Key="PSBlue">#2E6DB4</Color>
+    
+    <!-- PlayStation controller colours-->
+    <Color x:Key="PSConGreen">#27dd96</Color>
+    <Color x:Key="PSConPink">#de96c8</Color>
+    <Color x:Key="PSConPurpleBlue">#6d89c7</Color>
+    <Color x:Key="PSConRed">#f32b30</Color>
+
+    <Color x:Key="Grey">#858484</Color>
+    <Color x:Key="Black">#2b2b2b</Color>
+    <Color x:Key="White">white</Color>
+
+    <Style TargetType="Shell" ApplyToDerivedTypes="True">
+       
+        <!--Title bar colour-->
+        <Setter Property="Shell.BackgroundColor" Value="DarkBlue" />
+        <!--Title bar font color-->
+        <Setter Property="Shell.TitleColor"  Value="{StaticResource PSConGreen}" />
+
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="Zrnic"/>
+        <Setter Property="CharacterSpacing" Value="1" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="BackgroundColor" Value="#00FF" />
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="FontFamily" Value="Zrnic"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CharacterSpacing" Value="2" />
+        <Setter Property="BackgroundColor" Value="#817a7a7a"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="BorderColor" Value="White"/>
+        <Setter Property="CornerRadius" Value="30"/>
+    </Style>
+
+    <Style TargetType="Entry">
+        <Setter Property="FontFamily" Value="Zrnic"/>
+        <Setter Property="CharacterSpacing" Value="1" />
+        <Setter Property="FontSize" Value="Large" />
+        <Setter Property="PlaceholderColor" Value="White" />
+    </Style>
+
+    <Style TargetType="Picker">
+        <Setter Property="FontFamily" Value="Zrnic" />
+        <Setter Property="CharacterSpacing" Value="1" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" /> 
+        <Setter Property="FontSize" Value="Large" /> 
+    </Style>
+    
+</ResourceDictionary>

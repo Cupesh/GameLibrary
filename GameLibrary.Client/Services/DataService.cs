@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameLibrary.Client.Models;
+using GameLibrary.Shared.Models;
 
 namespace GameLibrary.Client.Services
 {
@@ -21,5 +22,21 @@ namespace GameLibrary.Client.Services
             string url = $"Test/Test";
             return await _client.GetDataAsync<List<User>>(url);
         }
+
+        #region User Management
+        
+        public async Task<ApiResponse<bool>> CheckUserNameUniqueness(string userName)
+        {
+            string url = $"UserManagement/CheckUserNameUniqueness?userName={userName}";
+            return await _client.GetDataAsync<bool>(url);
+        }
+
+        public async Task<ApiResponse<User>> CreateUser(User newUser)
+        {
+            string url = $"UserManagement/CreateUser";
+            return await _client.PostDataAsync<User>(url, newUser);
+        }
+
+        #endregion
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace GameLibrary.Client
+﻿using GameLibrary.Client.Pages;
+
+namespace GameLibrary.Client
 {
     public partial class App : Application
     {
@@ -6,7 +8,10 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+                Shell.Current.CurrentItem = PhoneTabs;
+
+            Routing.RegisterRoute("signup", typeof(SignUpPage));
         }
     }
 }
