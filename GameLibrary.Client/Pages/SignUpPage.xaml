@@ -89,8 +89,8 @@
                Grid.Column="2"
                Grid.ColumnSpan="8"
                Placeholder="Password..."
-               Text="{Binding NewUser.Password}"
                FontFamily="Zrnic"
+               Text="{Binding NewUser.Password}"
                IsPassword="True" />
 
         <Picker Grid.Row="6"

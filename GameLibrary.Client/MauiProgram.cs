@@ -39,7 +39,7 @@ public static class MauiProgram
         builder.Services.AddTransient<MyGamesViewModel>();
         builder.Services.AddTransient<SignUpViewModel>();
 
-        builder.Services.AddHttpClient<ServerAPIClient>(client => client.BaseAddress = new Uri("https://localhost:7031"));
+        builder.Services.AddHttpClient<ServerAPIClient>(client => client.BaseAddress = new Uri("https://192.168.1.81:45455/swagger"));
 
         return builder.Build();
 	}

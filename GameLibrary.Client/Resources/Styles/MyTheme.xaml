@@ -51,7 +51,7 @@
 
     <Style TargetType="Entry">
         <Setter Property="FontFamily" Value="Zrnic"/>
-        <Setter Property="CharacterSpacing" Value="1" />
+        <Setter Property="CharacterSpacing" Value="0" />
         <Setter Property="FontSize" Value="Large" />
         <Setter Property="PlaceholderColor" Value="White" />
     </Style>
