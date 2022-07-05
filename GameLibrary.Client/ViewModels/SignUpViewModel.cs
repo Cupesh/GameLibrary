@@ -18,6 +18,7 @@ namespace GameLibrary.Client.ViewModels
 
         public ICommand OnCreateProfileClicked { get { return new Command(() => OnCreateProfile()); } }
         public ICommand OnBackButtonPressed { get { return new Command(() => BackButtonPressed()); } }
+        public ICommand OnLoginClicked { get { return new Command(() => LoginClicked()); } }
 
         public SignUpViewModel(IDataService dataService)
         {
@@ -32,6 +33,7 @@ namespace GameLibrary.Client.ViewModels
             if (NewUser.UserName.Length < 2 || NewUser.UserName.Length > 30)
             {
                 ErrorMessage = "Username must be 2 - 30 characters";
+                RaisePropertyChanged(nameof(ErrorMessage));
                 return;
             }
 
@@ -42,12 +44,14 @@ namespace GameLibrary.Client.ViewModels
             if (!passwordCheck)
             {
                 ErrorMessage = "Password must be at least 8 characters. One letter, one digit.";
+                RaisePropertyChanged(nameof(ErrorMessage));
                 return;
             }
 
             if (String.IsNullOrEmpty(NewUser.Region))
             {
                 ErrorMessage = "Select a region.";
+                RaisePropertyChanged(nameof(ErrorMessage));
                 return;
             }
 
@@ -125,6 +129,11 @@ namespace GameLibrary.Client.ViewModels
         public bool BackButtonPressed()
         {
             return false;
+        }
+
+        public async void LoginClicked()
+        {
+            await Shell.Current.GoToAsync("signin");
         }
     }
 }

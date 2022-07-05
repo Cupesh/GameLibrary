@@ -7,11 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameLibrary.Client", "GameL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameLibrary.Server", "GameLibrary.Server\GameLibrary.Server.csproj", "{77E8773D-B324-4526-86D6-FF66BC2A49EA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17A00D5F-8FDF-4637-94B3-40C369C55E31}"
-	ProjectSection(SolutionItems) = preProject
-		ToDoList.txt = ToDoList.txt
-	EndProjectSection
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GameLibrary.Shared", "GameLibrary.Shared\GameLibrary.Shared.shproj", "{AB2F35C8-5949-46C7-BED7-0387B3120559}"
 EndProject
 Global

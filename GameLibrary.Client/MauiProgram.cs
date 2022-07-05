@@ -31,6 +31,7 @@ public static class MauiProgram
         builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddTransient<MyGamesPage>();
         builder.Services.AddTransient<SignUpPage>();
+        builder.Services.AddTransient<SignInPage>();
 
         //view models
         builder.Services.AddTransient<MainPageViewModel>();
@@ -38,6 +39,7 @@ public static class MauiProgram
         builder.Services.AddTransient<SettingsViewModel>();
         builder.Services.AddTransient<MyGamesViewModel>();
         builder.Services.AddTransient<SignUpViewModel>();
+        builder.Services.AddTransient<SignInViewModel>();
 
         builder.Services.AddHttpClient<ServerAPIClient>(client => client.BaseAddress = new Uri("http://192.168.1.81:45455/swagger"));
 

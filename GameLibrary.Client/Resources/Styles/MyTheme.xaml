@@ -43,9 +43,9 @@
         <Setter Property="CharacterSpacing" Value="2" />
         <Setter Property="BackgroundColor" Value="#817a7a7a"/>
         <Setter Property="FontAttributes" Value="Bold"/>
-        <Setter Property="TextColor" Value="White"/>
-        <Setter Property="BorderWidth" Value="1"/>
-        <Setter Property="BorderColor" Value="White"/>
+        <Setter Property="TextColor" Value="Aqua"/>
+        <Setter Property="BorderWidth" Value="2"/>
+        <Setter Property="BorderColor" Value="Aqua"/>
         <Setter Property="CornerRadius" Value="30"/>
     </Style>
 
@@ -63,6 +63,11 @@
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" /> 
         <Setter Property="FontSize" Value="Large" /> 
+    </Style>
+
+    <Style TargetType="Span">
+        <Setter Property="FontFamily" Value="Zrnic" />
+        <Setter Property="TextColor" Value="White" />
     </Style>
     
 </ResourceDictionary>

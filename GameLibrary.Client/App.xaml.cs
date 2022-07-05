@@ -12,6 +12,7 @@ namespace GameLibrary.Client
                 Shell.Current.CurrentItem = PhoneTabs;
 
             Routing.RegisterRoute("signup", typeof(SignUpPage));
+            Routing.RegisterRoute("signin", typeof(SignInPage));
         }
     }
 }
