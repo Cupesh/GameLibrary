@@ -9,6 +9,7 @@ namespace GameLibrary.Server.Data.Repositories
 
         Task<User> CreateUser(User newUser);
         Task<bool> CheckUserNameUniqueness(string userName);
+        Task<User> Login(User user);
 
         #endregion
 

@@ -37,6 +37,12 @@ namespace GameLibrary.Client.Services
             return await _client.PostDataAsync<User>(url, newUser);
         }
 
+        public async Task<ApiResponse<User>> Login(User user)
+        {
+            string url = $"UserManagement/Login";
+            return await _client.PostDataAsync<User>(url, user);
+        }
+
         #endregion
     }
 }
