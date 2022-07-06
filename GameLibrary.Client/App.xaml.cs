@@ -13,6 +13,7 @@ namespace GameLibrary.Client
 
             Routing.RegisterRoute("signup", typeof(SignUpPage));
             Routing.RegisterRoute("signin", typeof(SignInPage));
+            Routing.RegisterRoute("mainMenu", typeof(MainMenuPage));
         }
     }
 }

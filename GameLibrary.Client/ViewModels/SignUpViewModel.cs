@@ -109,7 +109,7 @@ namespace GameLibrary.Client.ViewModels
                 var resp = await DataService.CreateUser(NewUser);
                 if (resp.IsSuccess)
                 {
-
+                    OnSuccessfulSignUp(resp.ApiData);
                 }
                 else
                 {
@@ -134,6 +134,14 @@ namespace GameLibrary.Client.ViewModels
         public async void LoginClicked()
         {
             await Shell.Current.GoToAsync("signin");
+        }
+
+        private async void OnSuccessfulSignUp(User user)
+        {
+            Preferences.Set("Username", user.UserName);
+            Preferences.Set("Region", user.Region);
+
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

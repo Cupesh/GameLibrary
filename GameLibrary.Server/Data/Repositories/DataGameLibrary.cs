@@ -33,6 +33,15 @@ namespace GameLibrary.Server.Data.Repositories
             return result.First();
         }
 
+        public async Task<User> Login(User user)
+        {
+            var sql = $"SELECT * FROM tblUsers WHERE UserName = @userName";
+            var par = new { userName = user.UserName };
+            var result = await _repository.GetDapperListAsync<User>(sql, par, CommandType.Text);
+
+            return result.First();
+        }
+
         #endregion
 
         public async Task<List<Game>> Populate(Game game)

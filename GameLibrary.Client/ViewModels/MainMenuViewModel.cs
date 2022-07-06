@@ -19,7 +19,7 @@ namespace GameLibrary.Client.ViewModels
 
         private async void CheckUserProfile()
         {
-            if (!Preferences.ContainsKey("UserName"))
+            if (!Preferences.ContainsKey("Username"))
             {
                 await Shell.Current.GoToAsync("signup");
             }

@@ -2,6 +2,7 @@
 using GameLibrary.Server.Models;
 using GameLibrary.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
+using NETCore.Encrypt;
 using System.Text.Json;
 
 namespace GameLibrary.Server.Controllers
@@ -11,6 +12,9 @@ namespace GameLibrary.Server.Controllers
     public class UserManagementController : ControllerBase
     {
         private readonly IDataGameLibrary _dataGameLibrary;
+
+        // temporary hash key
+        private string key { get; set; } = "EAtg@%454£b94g.gFGHh&s4*62)";
 
         public UserManagementController(IDataGameLibrary dataGameLibrary)
         {
@@ -37,7 +41,36 @@ namespace GameLibrary.Server.Controllers
         {
             try
             {
+                string password = newUser.Password;
+                newUser.Password = EncryptProvider.HMACSHA512(password, key);
+
                 User response = await _dataGameLibrary.CreateUser(newUser);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] User user)
+        {
+            try
+            {
+                User response = await _dataGameLibrary.Login(user);
+                if (response == null)
+                {
+                    return BadRequest();
+                }
+
+                var password = EncryptProvider.HMACSHA512(user.Password, key);
+
+                if (password != response.Password)
+                {
+                    return BadRequest();
+                }
 
                 return Ok(response);
             }

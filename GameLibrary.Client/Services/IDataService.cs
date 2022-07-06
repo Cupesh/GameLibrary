@@ -11,6 +11,7 @@ namespace GameLibrary.Client.Services
 
         Task<ApiResponse<bool>> CheckUserNameUniqueness(string userName);
         Task<ApiResponse<User>> CreateUser(User newUser);
+        Task<ApiResponse<User>> Login(User user);
 
         #endregion
     }
