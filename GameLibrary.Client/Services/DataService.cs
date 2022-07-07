@@ -28,7 +28,8 @@ namespace GameLibrary.Client.Services
         public async Task<ApiResponse<bool>> CheckUserNameUniqueness(string userName)
         {
             string url = $"UserManagement/CheckUserNameUniqueness?userName={userName}";
-            return await _client.GetDataAsync<bool>(url);
+            var result = await _client.GetDataAsync<bool>(url);
+            return result;
         }
 
         public async Task<ApiResponse<User>> CreateUser(User newUser)

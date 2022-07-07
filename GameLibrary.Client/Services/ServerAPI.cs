@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -31,7 +32,12 @@ namespace GameLibrary.Client.Services
             try
             {
                 _httpClient.DefaultRequestVersion = new Version(2, 0);
-                var resp = await _httpClient.GetAsync(url); 
+                if (_httpClient.BaseAddress == null)
+                {
+                    _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
+                }
+
+                var resp = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead); 
 
                 if (resp.IsSuccessStatusCode) { apiResponse.ApiData = await resp.Content.ReadFromJsonAsync<T>(); }
                 else
@@ -84,6 +90,10 @@ namespace GameLibrary.Client.Services
 
             try
             {
+                if (_httpClient.BaseAddress == null)
+                {
+                    _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
+                }
                 if (content is MultipartFormDataContent contentMfd) { resp = await _httpClient.PostAsync(url, contentMfd); }
                 else
                 {
@@ -125,6 +135,10 @@ namespace GameLibrary.Client.Services
 
             try
             {
+                if (_httpClient.BaseAddress == null)
+                {
+                    _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
+                }
                 if (content is MultipartFormDataContent contentMfd) { resp = await _httpClient.PostAsync(url, contentMfd); }
                 else
                 {

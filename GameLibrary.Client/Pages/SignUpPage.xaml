@@ -6,11 +6,11 @@
              Shell.FlyoutBehavior="Disabled"
              Shell.TabBarIsVisible="False">
 
-    <!--<Shell.BackButtonBehavior>
+    <Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding OnBackButtonPressed}">
             
         </BackButtonBehavior>
-    </Shell.BackButtonBehavior>-->
+    </Shell.BackButtonBehavior>
 
 
 

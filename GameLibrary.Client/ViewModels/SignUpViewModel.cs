@@ -55,32 +55,22 @@ namespace GameLibrary.Client.ViewModels
                 return;
             }
 
-            bool isUnique = await CheckUniqueUserName();
-            if (!isUnique)
-            {
-                ErrorMessage = "This user name is already taken, Choose a different one.";
-                RaisePropertyChanged(nameof(ErrorMessage));
-                return;
-            }
-            else
-            {
-                await CreateUser();
-            }
-        }
-
-        public async Task<bool> CheckUniqueUserName()
-        {
             Loading = true;
             RaisePropertyChanged(nameof(Loading));
-            ErrorMessage = String.Empty;
-
             try
             {
                 var resp = await DataService.CheckUserNameUniqueness(NewUser.UserName);
                 if (resp.IsSuccess)
                 {
-                    Loading = false;
-                    return true;
+                    bool isUnique = resp.ApiData;
+                    if (isUnique)
+                    {
+                        await CreateUser();
+                    }
+                    else
+                    {
+                        ErrorMessage = "This user name is already taken, Choose a different one.";
+                    }
                 }
                 else
                 {
@@ -93,9 +83,9 @@ namespace GameLibrary.Client.ViewModels
             }
 
             Loading = false;
-            RaisePropertyChanged(nameof(Loading));
             RaisePropertyChanged(nameof(ErrorMessage));
-            return false;
+            RaisePropertyChanged(nameof(Loading));
+            return;
         }
 
         public async Task CreateUser()
