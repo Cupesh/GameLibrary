@@ -15,11 +15,13 @@ namespace GameLibrary.Client.Services
     {
         private HttpClient _httpClient;
         private readonly IJsonService _jsonService;
+        private IHttpClientFactory _httpClientFactory;
 
-        public ServerAPIClient(HttpClient httpClient, IJsonService jsonService)
+        public ServerAPIClient(HttpClient httpClient, IJsonService jsonService, IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClient;
             _jsonService = jsonService;
+            _httpClientFactory = httpClientFactory;
         }
 
         /// <summary>
@@ -27,7 +29,7 @@ namespace GameLibrary.Client.Services
         /// </summary>
         public async Task<ApiResponse<T>> GetDataAsync<T>(string url)
         {
-            _httpClient = new HttpClient();
+            _httpClient = _httpClientFactory.CreateClient();
             _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
 
             ApiResponse<T> apiResponse = new() { IsSuccess = false, ApiData = default, IsSessionTimedOut = false };
@@ -62,29 +64,12 @@ namespace GameLibrary.Client.Services
             return apiResponse;
         }
 
-        public async Task<(byte[] data, string contentType)> GetPhysicalFile(string url, string fileName)
-        {
-            try
-            {
-                var response = await _httpClient.GetAsync($"{url}?fileName={fileName}");
-                response.EnsureSuccessStatusCode();
-                var byteArray = await response.Content.ReadAsByteArrayAsync();
-                return (byteArray, response.Content.Headers.ContentType.MediaType);
-            }
-            catch (Exception ex)
-            {
-                string message = ex.Message;
-                return (null, message);
-            }
-
-        }
-
         /// <summary>
         /// Post to an API endpoint returning data 
         /// </summary>
         public async Task<ApiResponse<TResp>> PostDataAsync<TResp>(string url, object content = null)
         {
-            _httpClient = new HttpClient();
+            _httpClient = _httpClientFactory.CreateClient();
             _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
 
             ApiResponse<TResp> apiResponse = new() { IsSuccess = false, IsSessionTimedOut = false };
@@ -128,7 +113,7 @@ namespace GameLibrary.Client.Services
         /// </summary>
         public async Task<ApiResponse> PostDataAsync(string url, object content = null)
         {
-            _httpClient = new HttpClient();
+            _httpClient = _httpClientFactory.CreateClient();
             _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
 
             ApiResponse apiResponse = new() { IsSuccess = false, IsSessionTimedOut = false };
@@ -136,10 +121,6 @@ namespace GameLibrary.Client.Services
 
             try
             {
-                if (_httpClient.BaseAddress == null)
-                {
-                    _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
-                }
                 if (content is MultipartFormDataContent contentMfd) { resp = await _httpClient.PostAsync(url, contentMfd); }
                 else
                 {
