@@ -13,7 +13,7 @@ namespace GameLibrary.Client.Services
 {
     public class ServerAPIClient
     {
-        private readonly HttpClient _httpClient;
+        private HttpClient _httpClient;
         private readonly IJsonService _jsonService;
 
         public ServerAPIClient(HttpClient httpClient, IJsonService jsonService)
@@ -27,15 +27,14 @@ namespace GameLibrary.Client.Services
         /// </summary>
         public async Task<ApiResponse<T>> GetDataAsync<T>(string url)
         {
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
+
             ApiResponse<T> apiResponse = new() { IsSuccess = false, ApiData = default, IsSessionTimedOut = false };
 
             try
             {
                 _httpClient.DefaultRequestVersion = new Version(2, 0);
-                if (_httpClient.BaseAddress == null)
-                {
-                    _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
-                }
 
                 var resp = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead); 
 
@@ -85,15 +84,14 @@ namespace GameLibrary.Client.Services
         /// </summary>
         public async Task<ApiResponse<TResp>> PostDataAsync<TResp>(string url, object content = null)
         {
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
+
             ApiResponse<TResp> apiResponse = new() { IsSuccess = false, IsSessionTimedOut = false };
             HttpResponseMessage resp;
 
             try
             {
-                if (_httpClient.BaseAddress == null)
-                {
-                    _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
-                }
                 if (content is MultipartFormDataContent contentMfd) { resp = await _httpClient.PostAsync(url, contentMfd); }
                 else
                 {
@@ -130,6 +128,9 @@ namespace GameLibrary.Client.Services
         /// </summary>
         public async Task<ApiResponse> PostDataAsync(string url, object content = null)
         {
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("http://192.168.1.81:45455/swagger");
+
             ApiResponse apiResponse = new() { IsSuccess = false, IsSessionTimedOut = false };
             HttpResponseMessage resp;
 
