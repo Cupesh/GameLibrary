@@ -1,4 +1,5 @@
 ﻿using GameLibrary.Client.Services;
+using GameLibrary.Shared.Models;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,9 @@ namespace GameLibrary.Client.ViewModels
 {
     public class MainMenuViewModel : BaseViewModel
     {
+        public bool IsLoading { get; set; } = false;
+        public string ErrorMessage { get; set; } = string.Empty;
+
         public MainMenuViewModel(IDataService dataService)
         {
             DataService = dataService;

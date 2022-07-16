@@ -11,10 +11,7 @@ namespace GameLibrary.Client.ViewModels
 {
     public class SignInViewModel : BaseViewModel
     {
-        public bool Loading { get; set; }
         public User User { get; set; } = new();
-        public string ErrorMessage { get; set; } = string.Empty;
-
 
         public ICommand OnLoginClicked { get { return new Command(() => CheckInput()); } }
 
@@ -31,7 +28,6 @@ namespace GameLibrary.Client.ViewModels
             if (User.UserName.Length < 2 || User.UserName.Length > 30)
             {
                 ErrorMessage = "Username must be 2 - 30 characters";
-                RaisePropertyChanged(nameof(ErrorMessage));
                 return;
             }
 
@@ -40,7 +36,6 @@ namespace GameLibrary.Client.ViewModels
             if (!passwordCheck)
             {
                 ErrorMessage = "Password must be at least 8 characters. One letter, one digit.";
-                RaisePropertyChanged(nameof(ErrorMessage));
                 return;
             }
 
@@ -51,8 +46,6 @@ namespace GameLibrary.Client.ViewModels
         {
             Loading = true;
             ErrorMessage = String.Empty;
-            RaisePropertyChanged(nameof(ErrorMessage));
-            RaisePropertyChanged(nameof(Loading));
 
             try
             {
@@ -72,12 +65,11 @@ namespace GameLibrary.Client.ViewModels
             }
 
             Loading = false;
-            RaisePropertyChanged(nameof(ErrorMessage));
-            RaisePropertyChanged(nameof(Loading));
         }
 
         private async void OnSuccessfulLogin(User user)
         {
+            Preferences.Set("UserId", user.UserId);
             Preferences.Set("Username", user.UserName);
             Preferences.Set("Region", user.Region);
 

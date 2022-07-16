@@ -10,6 +10,26 @@ namespace GameLibrary.Client.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
+        private bool loading;
+        public bool Loading
+        {
+            get => loading;
+            set
+            {
+                loading = value;
+                RaisePropertyChanged(nameof(Loading));
+            }
+        }
+        private string errorMessage;
+        public string ErrorMessage
+        {
+            get => errorMessage;
+            set
+            {
+                errorMessage = value;
+                RaisePropertyChanged(nameof(ErrorMessage));
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged(params string[] propertyNames)

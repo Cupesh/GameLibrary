@@ -2,7 +2,6 @@
 using GameLibrary.Shared.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,9 +12,7 @@ namespace GameLibrary.Client.ViewModels
 {
     public class SignUpViewModel : BaseViewModel
     {
-        public bool Loading { get; set; }
         public User NewUser { get; set; } = new();
-        public string ErrorMessage { get; set; } = string.Empty;
 
         public ICommand OnCreateProfileClicked { get { return new Command(() => OnCreateProfile()); } }
         public ICommand OnBackButtonPressed { get { return new Command(() => BackButtonPressed()); } }
@@ -26,16 +23,13 @@ namespace GameLibrary.Client.ViewModels
             DataService = dataService;
         }
 
-        public async void OnCreateProfile()
+        public bool SignUpFormValidation()
         {
-            ErrorMessage = string.Empty;
-
             NewUser.UserName.Trim();
             if (NewUser.UserName.Length < 2 || NewUser.UserName.Length > 30)
-            {
-                ErrorMessage = "Username must be 2 - 30 characters";
-                RaisePropertyChanged(nameof(ErrorMessage));
-                return;
+            { 
+                ErrorMessage += "Username must be 2 - 30 characters";
+                return false;
             }
 
             var passwordCheck = NewUser.Password.Length >= 8 &&
@@ -44,20 +38,25 @@ namespace GameLibrary.Client.ViewModels
 
             if (!passwordCheck)
             {
-                ErrorMessage = "Password must be at least 8 characters. One letter, one digit.";
-                RaisePropertyChanged(nameof(ErrorMessage));
-                return;
+                ErrorMessage += "Password must be at least 8 characters. One letter, one digit.";
+                return false;
             }
 
             if (String.IsNullOrEmpty(NewUser.Region))
-            {
-                ErrorMessage = "Select a region.";
-                RaisePropertyChanged(nameof(ErrorMessage));
-                return;
+            { 
+                ErrorMessage += "Select a region.";
+                return false;
             }
 
+            return true;
+        }
+
+        public async void OnCreateProfile()
+        {
+            ErrorMessage = string.Empty;
+            if (!SignUpFormValidation()) { return; }
             Loading = true;
-            RaisePropertyChanged(nameof(Loading));
+
             try
             {
                 var resp = await DataService.CheckUserNameUniqueness(NewUser.UserName);
@@ -76,7 +75,6 @@ namespace GameLibrary.Client.ViewModels
                 else
                 {
                     ErrorMessage = resp.ErrorMessage;
-                    if (String.IsNullOrEmpty(ErrorMessage)) { ErrorMessage = "Something went wrong..."; }
                 }
             }
             catch (Exception ex)
@@ -85,15 +83,12 @@ namespace GameLibrary.Client.ViewModels
             }
 
             Loading = false;
-            RaisePropertyChanged(nameof(ErrorMessage));
-            RaisePropertyChanged(nameof(Loading));
             return;
         }
 
         public async Task CreateUser()
         {
             Loading = true;
-            RaisePropertyChanged(nameof(Loading));
             ErrorMessage = String.Empty;
 
             try
@@ -114,8 +109,6 @@ namespace GameLibrary.Client.ViewModels
             }
 
             Loading = false;
-            RaisePropertyChanged(nameof(Loading));
-            RaisePropertyChanged(nameof(ErrorMessage));
         }
 
         public bool BackButtonPressed()
@@ -130,6 +123,7 @@ namespace GameLibrary.Client.ViewModels
 
         private async void OnSuccessfulSignUp(User user)
         {
+            Preferences.Set("UserId", user.UserId);
             Preferences.Set("Username", user.UserName);
             Preferences.Set("Region", user.Region);
 
