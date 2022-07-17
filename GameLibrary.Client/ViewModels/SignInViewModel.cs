@@ -17,6 +17,7 @@ namespace GameLibrary.Client.ViewModels
         public User User { get; set; } = new();
 
         public ICommand OnLoginClicked { get { return new Command(() => CheckInput()); } }
+        public ICommand OnForgotPasswordClicked { get { return new Command(() => ForgotPasswordClicked()); } }
 
         public SignInViewModel(IDataService dataService)
         {
@@ -56,20 +57,10 @@ namespace GameLibrary.Client.ViewModels
                 if (resp.IsSuccess)
                 {
                     OnSuccessfulLogin(resp.ApiData);
-                    var toast = Toast.Make("Success!");
-                    await toast.Show();
                 }
-                else
-                {
-                    var toast = Toast.Make("Invalid username or password");
-                    await toast.Show();
-                }
+                else { await DisplayAlert("Ooops...", $"{resp.ErrorMessage}", "Ok"); }
             }
-            catch (Exception ex)
-            {
-                var toast = Toast.Make(ex.Message, CommunityToolkit.Maui.Core.ToastDuration.Long);
-                await toast.Show();
-            }
+            catch (Exception ex) { await DisplayAlert("Ooops...", $"{ex.Message}", "Ok"); }
 
             Loading = false;
         }
@@ -81,6 +72,11 @@ namespace GameLibrary.Client.ViewModels
             Preferences.Set("Region", user.Region);
 
             await Shell.Current.GoToAsync("../..");
+        }
+
+        private async void ForgotPasswordClicked()
+        {
+
         }
     }
 }

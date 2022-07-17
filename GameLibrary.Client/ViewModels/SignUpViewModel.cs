@@ -20,7 +20,6 @@ namespace GameLibrary.Client.ViewModels
         public ICommand OnCreateProfileClicked { get { return new Command(() => OnCreateProfile()); } }
         public ICommand OnBackButtonPressed { get { return new Command(() => BackButtonPressed()); } }
         public ICommand OnLoginClicked { get { return new Command(() => LoginClicked()); } }
-        public ICommand OnWhyEmailClicked { get { return new Command(() => WhyEmailClicked()); } }
 
         public SignUpViewModel(IDataService dataService)
         {
@@ -73,20 +72,12 @@ namespace GameLibrary.Client.ViewModels
                     }
                     else
                     {
-                        ErrorMessage = "This user name is already taken, Choose a different one.";
+                        await DisplayAlert("", "This user name is already taken, Choose a different one.", "Ok");
                     }
                 }
-                else
-                {
-                    var toast = Toast.Make(resp.ErrorMessage, ToastDuration.Long);
-                    await toast.Show();
-                }
+                else { await DisplayAlert("Ooops...", $"{resp.ErrorMessage}", "Ok"); }
             }
-            catch (Exception ex)
-            {
-                var toast = Toast.Make(ex.Message, ToastDuration.Long);
-                await toast.Show();
-            }
+            catch (Exception ex) { await DisplayAlert("Ooops...", $"{ex.Message}", "Ok"); }
 
             Loading = false;
             return;
@@ -103,33 +94,17 @@ namespace GameLibrary.Client.ViewModels
                 if (resp.IsSuccess)
                 {
                     OnSuccessfulSignUp(resp.ApiData);
-                    var toast = Toast.Make("Success!");
-                    await toast.Show();
                 }
-                else
-                {
-                    var toast = Toast.Make(resp.ErrorMessage, ToastDuration.Long);
-                    await toast.Show();
-                }
+                else { await DisplayAlert("Ooops...", $"{resp.ErrorMessage}", "Ok"); }
             }
-            catch (Exception ex)
-            {
-                var toast = Toast.Make(ex.Message, ToastDuration.Long);
-                await toast.Show();
-            }
+            catch (Exception ex) { await DisplayAlert("Ooops...", $"{ex.Message}", "Ok"); }
 
             Loading = false;
         }
 
-        public bool BackButtonPressed()
-        {
-            return false;
-        }
+        public bool BackButtonPressed() => false;
 
-        public async void LoginClicked()
-        {
-            await Shell.Current.GoToAsync("signin");
-        }
+        public async void LoginClicked() { await Shell.Current.GoToAsync("signin"); }
 
         private async void OnSuccessfulSignUp(User user)
         {
@@ -138,11 +113,6 @@ namespace GameLibrary.Client.ViewModels
             Preferences.Set("Region", user.Region);
 
             await Shell.Current.GoToAsync("..");
-        }
-
-        private async void WhyEmailClicked()
-        {
-            
         }
     }
 }

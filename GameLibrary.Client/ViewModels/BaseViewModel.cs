@@ -10,6 +10,8 @@ namespace GameLibrary.Client.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
+        public INavigation Navigation { get; set; }
+        public IDataService DataService { get; set; }
         private bool loading;
         public bool Loading
         {
@@ -30,6 +32,7 @@ namespace GameLibrary.Client.ViewModels
                 RaisePropertyChanged(nameof(ErrorMessage));
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged(params string[] propertyNames)
@@ -40,7 +43,9 @@ namespace GameLibrary.Client.ViewModels
             }
         }
 
-        public INavigation Navigation { get; set; }
-        public IDataService DataService { get; set; }
+        public async Task DisplayAlert(string title, string message, string accept)
+        {
+            await Application.Current.MainPage.DisplayAlert(title, message, accept);
+        }
     }
 }

@@ -107,16 +107,15 @@
                Keyboard="Text">
         </Entry>
 
-        <Button Grid.Row="8"
-                Grid.Column="1"
-                Grid.ColumnSpan="8"
-                Text="Why email address?"
-                FontSize="Subtitle"
+        <Label Grid.Row="8"
+                Grid.Column="0"
+                Grid.ColumnSpan="12"
+                Text="Email required for password recovery/change"
                 FontAttributes="Bold"
-                TextColor="Aqua"
-                Command="{Binding OnWhyEmailClicked}"
-                BorderWidth="0"
-                BackgroundColor="#00FF"/>
+                FontSize="Small"
+                TextColor="LightGreen"
+                BackgroundColor="#00FF"
+               VerticalTextAlignment="Start"/>
 
         <Picker Grid.Row="9"
                 Grid.Column="2"

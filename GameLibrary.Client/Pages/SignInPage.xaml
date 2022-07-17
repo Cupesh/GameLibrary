@@ -76,6 +76,17 @@
                Text="{Binding User.Password}"
                IsPassword="True" />
 
+        <Button Grid.Row="6"
+                Grid.Column="1"
+                Grid.ColumnSpan="10"
+                Text="Forgot password?"
+                FontSize="Subtitle"
+                FontAttributes="Bold"
+                TextColor="Aqua"
+                Command="{Binding OnForgotPasswordClicked}"
+                BorderWidth="0"
+                BackgroundColor="#00FF"/>
+
         <ActivityIndicator Grid.Row="7"
                            Grid.Column="5"
                            Grid.ColumnSpan="2"
