@@ -25,9 +25,9 @@ namespace GameLibrary.Server.Data.Repositories
 
         public async Task<User> CreateUser(User newUser)
         {
-            var sql = $"INSERT INTO tblUsers (UserName, Password, Region) VALUES (@userName, @password, @region) " +
+            var sql = $"INSERT INTO tblUsers (UserName, Password, Region, EmailAddress) VALUES (@userName, @password, @region, @emailAddress) " +
                       $"SELECT * FROM tblUsers WHERE UserName = @userName";
-            var pars = new { userName = newUser.UserName, password = newUser.Password, region = newUser.Region };
+            var pars = new { userName = newUser.UserName, password = newUser.Password, region = newUser.Region, emailAddress = newUser.EmailAddress };
             var result = await _repository.GetDapperListAsync<User>(sql, pars, CommandType.Text);
 
             return result.First();

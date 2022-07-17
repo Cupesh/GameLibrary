@@ -1,4 +1,7 @@
-﻿using GameLibrary.Client.Services;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
+using GameLibrary.Client.Services;
 using GameLibrary.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -17,6 +20,7 @@ namespace GameLibrary.Client.ViewModels
         public ICommand OnCreateProfileClicked { get { return new Command(() => OnCreateProfile()); } }
         public ICommand OnBackButtonPressed { get { return new Command(() => BackButtonPressed()); } }
         public ICommand OnLoginClicked { get { return new Command(() => LoginClicked()); } }
+        public ICommand OnWhyEmailClicked { get { return new Command(() => WhyEmailClicked()); } }
 
         public SignUpViewModel(IDataService dataService)
         {
@@ -74,12 +78,14 @@ namespace GameLibrary.Client.ViewModels
                 }
                 else
                 {
-                    ErrorMessage = resp.ErrorMessage;
+                    var toast = Toast.Make(resp.ErrorMessage, ToastDuration.Long);
+                    await toast.Show();
                 }
             }
             catch (Exception ex)
             {
-                ErrorMessage = ex.Message;
+                var toast = Toast.Make(ex.Message, ToastDuration.Long);
+                await toast.Show();
             }
 
             Loading = false;
@@ -97,15 +103,19 @@ namespace GameLibrary.Client.ViewModels
                 if (resp.IsSuccess)
                 {
                     OnSuccessfulSignUp(resp.ApiData);
+                    var toast = Toast.Make("Success!");
+                    await toast.Show();
                 }
                 else
                 {
-                    ErrorMessage = resp.ErrorMessage;
+                    var toast = Toast.Make(resp.ErrorMessage, ToastDuration.Long);
+                    await toast.Show();
                 }
             }
             catch (Exception ex)
             {
-                ErrorMessage = ex.Message;
+                var toast = Toast.Make(ex.Message, ToastDuration.Long);
+                await toast.Show();
             }
 
             Loading = false;
@@ -128,6 +138,11 @@ namespace GameLibrary.Client.ViewModels
             Preferences.Set("Region", user.Region);
 
             await Shell.Current.GoToAsync("..");
+        }
+
+        private async void WhyEmailClicked()
+        {
+            
         }
     }
 }

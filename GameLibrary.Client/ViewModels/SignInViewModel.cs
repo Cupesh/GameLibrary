@@ -1,11 +1,14 @@
 ﻿using GameLibrary.Client.Services;
 using GameLibrary.Shared.Models;
+using CommunityToolkit.Maui.Alerts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Maui;
+using System.Threading;
 
 namespace GameLibrary.Client.ViewModels
 {
@@ -53,15 +56,19 @@ namespace GameLibrary.Client.ViewModels
                 if (resp.IsSuccess)
                 {
                     OnSuccessfulLogin(resp.ApiData);
+                    var toast = Toast.Make("Success!");
+                    await toast.Show();
                 }
                 else
                 {
-                    ErrorMessage = "Invalid username or password";
+                    var toast = Toast.Make("Invalid username or password");
+                    await toast.Show();
                 }
             }
             catch (Exception ex)
             {
-                ErrorMessage = ex.Message;
+                var toast = Toast.Make(ex.Message, CommunityToolkit.Maui.Core.ToastDuration.Long);
+                await toast.Show();
             }
 
             Loading = false;
