@@ -60,7 +60,7 @@
         <Setter Property="FontFamily" Value="Zrnic" />
         <Setter Property="CharacterSpacing" Value="1" />
         <Setter Property="TextColor" Value="White" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="VerticalTextAlignment" Value="Center" /> 
         <Setter Property="FontSize" Value="Large" /> 
     </Style>

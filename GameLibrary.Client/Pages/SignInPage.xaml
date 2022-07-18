@@ -4,9 +4,8 @@
              x:Class="GameLibrary.Client.Pages.SignInPage"
              Shell.FlyoutBehavior="Disabled"
              Shell.TabBarIsVisible="False">
+    
     <Grid>
-
-
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*" />
@@ -40,6 +39,8 @@
                Aspect="AspectFill"
                Grid.Row="0"
                Grid.RowSpan="12"
+               Opacity="0.5"
+               IsOpaque="True"
                Grid.Column="0"
                Grid.ColumnSpan="12"/>
 
@@ -76,6 +77,17 @@
                Text="{Binding User.Password}"
                IsPassword="True" />
 
+        <Button Grid.Row="6"
+                Grid.Column="1"
+                Grid.ColumnSpan="10"
+                Text="Forgot password?"
+                FontSize="Subtitle"
+                FontAttributes="Bold"
+                TextColor="Aqua"
+                Command="{Binding OnForgotPasswordClicked}"
+                BorderWidth="0"
+                BackgroundColor="#00FF"/>
+
         <ActivityIndicator Grid.Row="7"
                            Grid.Column="5"
                            Grid.ColumnSpan="2"
@@ -86,7 +98,7 @@
         <Button Grid.Row="8"
                 Grid.Column="3"
                 Grid.ColumnSpan="6"
-                Text="LOGIN"
+                Text="SIGN IN"
                 Command="{Binding OnLoginClicked}">
 
         </Button>

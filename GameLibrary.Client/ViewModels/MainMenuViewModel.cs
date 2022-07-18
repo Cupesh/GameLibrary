@@ -1,4 +1,5 @@
 ﻿using GameLibrary.Client.Services;
+using GameLibrary.Shared.Models;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;

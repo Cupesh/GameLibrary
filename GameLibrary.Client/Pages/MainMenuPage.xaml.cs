@@ -9,4 +9,8 @@ public partial class MainMenuPage : ContentPage
 		BindingContext = vm;
 		InitializeComponent();
 	}
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
+    }
 }

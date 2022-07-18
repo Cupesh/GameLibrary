@@ -1,4 +1,7 @@
-﻿using GameLibrary.Client.Services;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
+using GameLibrary.Client.Services;
 using GameLibrary.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -12,9 +15,7 @@ namespace GameLibrary.Client.ViewModels
 {
     public class SignUpViewModel : BaseViewModel
     {
-        public bool Loading { get; set; }
         public User NewUser { get; set; } = new();
-        public string ErrorMessage { get; set; } = string.Empty;
 
         public ICommand OnCreateProfileClicked { get { return new Command(() => OnCreateProfile()); } }
         public ICommand OnBackButtonPressed { get { return new Command(() => BackButtonPressed()); } }
@@ -25,16 +26,13 @@ namespace GameLibrary.Client.ViewModels
             DataService = dataService;
         }
 
-        public async void OnCreateProfile()
+        public bool SignUpFormValidation()
         {
-            ErrorMessage = string.Empty;
-
             NewUser.UserName.Trim();
             if (NewUser.UserName.Length < 2 || NewUser.UserName.Length > 30)
-            {
-                ErrorMessage = "Username must be 2 - 30 characters";
-                RaisePropertyChanged(nameof(ErrorMessage));
-                return;
+            { 
+                ErrorMessage += "Username must be 2 - 30 characters";
+                return false;
             }
 
             var passwordCheck = NewUser.Password.Length >= 8 &&
@@ -43,65 +41,51 @@ namespace GameLibrary.Client.ViewModels
 
             if (!passwordCheck)
             {
-                ErrorMessage = "Password must be at least 8 characters. One letter, one digit.";
-                RaisePropertyChanged(nameof(ErrorMessage));
-                return;
+                ErrorMessage += "Password must be at least 8 characters. One letter, one digit.";
+                return false;
             }
 
             if (String.IsNullOrEmpty(NewUser.Region))
-            {
-                ErrorMessage = "Select a region.";
-                RaisePropertyChanged(nameof(ErrorMessage));
-                return;
+            { 
+                ErrorMessage += "Select a region.";
+                return false;
             }
 
-            bool isUnique = await CheckUniqueUserName();
-            if (!isUnique)
-            {
-                ErrorMessage = "This user name is already taken, Choose a different one.";
-                RaisePropertyChanged(nameof(ErrorMessage));
-                return;
-            }
-            else
-            {
-                await CreateUser();
-            }
+            return true;
         }
 
-        public async Task<bool> CheckUniqueUserName()
+        public async void OnCreateProfile()
         {
+            ErrorMessage = string.Empty;
+            if (!SignUpFormValidation()) { return; }
             Loading = true;
-            RaisePropertyChanged(nameof(Loading));
-            ErrorMessage = String.Empty;
 
             try
             {
                 var resp = await DataService.CheckUserNameUniqueness(NewUser.UserName);
                 if (resp.IsSuccess)
                 {
-                    Loading = false;
-                    return true;
+                    bool isUnique = resp.ApiData;
+                    if (isUnique)
+                    {
+                        await CreateUser();
+                    }
+                    else
+                    {
+                        await DisplayAlert("", "This user name is already taken, Choose a different one.", "Ok");
+                    }
                 }
-                else
-                {
-                    ErrorMessage = resp.ErrorMessage;
-                }
+                else { await DisplayAlert("Ooops...", $"{resp.ErrorMessage}", "Ok"); }
             }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
+            catch (Exception ex) { await DisplayAlert("Ooops...", $"{ex.Message}", "Ok"); }
 
             Loading = false;
-            RaisePropertyChanged(nameof(Loading));
-            RaisePropertyChanged(nameof(ErrorMessage));
-            return false;
+            return;
         }
 
         public async Task CreateUser()
         {
             Loading = true;
-            RaisePropertyChanged(nameof(Loading));
             ErrorMessage = String.Empty;
 
             try
@@ -111,33 +95,22 @@ namespace GameLibrary.Client.ViewModels
                 {
                     OnSuccessfulSignUp(resp.ApiData);
                 }
-                else
-                {
-                    ErrorMessage = resp.ErrorMessage;
-                }
+                else { await DisplayAlert("Ooops...", $"{resp.ErrorMessage}", "Ok"); }
             }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
+            catch (Exception ex) { await DisplayAlert("Ooops...", $"{ex.Message}", "Ok"); }
 
             Loading = false;
-            RaisePropertyChanged(nameof(Loading));
-            RaisePropertyChanged(nameof(ErrorMessage));
         }
 
-        public bool BackButtonPressed()
-        {
-            return false;
-        }
+        public bool BackButtonPressed() => false;
 
-        public async void LoginClicked()
-        {
-            await Shell.Current.GoToAsync("signin");
-        }
+        public async void LoginClicked() { await Shell.Current.GoToAsync("signin"); }
 
         private async void OnSuccessfulSignUp(User user)
         {
+            await DisplayAlert("Success", $"Welcome, {user.UserName}!", "Ok");
+
+            Preferences.Set("UserId", user.UserId);
             Preferences.Set("Username", user.UserName);
             Preferences.Set("Region", user.Region);
 

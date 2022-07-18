@@ -17,18 +17,13 @@ namespace GameLibrary.Client.Services
             _client = serverClient;
         }
 
-        public async Task<ApiResponse<List<User>>> Test()
-        {
-            string url = $"Test/Test";
-            return await _client.GetDataAsync<List<User>>(url);
-        }
-
         #region User Management
         
         public async Task<ApiResponse<bool>> CheckUserNameUniqueness(string userName)
         {
             string url = $"UserManagement/CheckUserNameUniqueness?userName={userName}";
-            return await _client.GetDataAsync<bool>(url);
+            var result = await _client.GetDataAsync<bool>(url);
+            return result;
         }
 
         public async Task<ApiResponse<User>> CreateUser(User newUser)
@@ -41,6 +36,12 @@ namespace GameLibrary.Client.Services
         {
             string url = $"UserManagement/Login";
             return await _client.PostDataAsync<User>(url, user);
+        }
+
+        public async Task<ApiResponse<bool>> SendPwdRecoveryEmail(string email)
+        {
+            string url = $"UserManagement/SendPwdRecoveryEmail?email={email}";
+            return await _client.GetDataAsync<bool>(url);
         }
 
         #endregion
