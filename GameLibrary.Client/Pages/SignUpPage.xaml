@@ -7,15 +7,10 @@
              Shell.TabBarIsVisible="False">
 
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding OnBackButtonPressed}">
-            
-        </BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding OnBackButtonPressed}"></BackButtonBehavior>
     </Shell.BackButtonBehavior>
 
-
-
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*" />
@@ -49,6 +44,8 @@
 
         <Image x:Name="backgroundImage" Source="p1art.jpg"
                Aspect="AspectFill"
+               Opacity="0.5"
+               IsOpaque="True"
                Grid.Row="0"
                Grid.RowSpan="14"
                Grid.Column="0"
@@ -102,7 +99,7 @@
                Grid.Column="2"
                Grid.ColumnSpan="8"
                Grid.RowSpan="1"
-               Placeholder="Email (optional)..."
+               Placeholder="Email (optional*)..."
                Text="{Binding NewUser.EmailAddress}" 
                Keyboard="Text">
         </Entry>
@@ -110,7 +107,7 @@
         <Label Grid.Row="8"
                 Grid.Column="0"
                 Grid.ColumnSpan="12"
-                Text="Email required for password recovery/change"
+                Text="* Required for password recovery"
                 FontAttributes="Bold"
                 FontSize="Small"
                 TextColor="LightGreen"

@@ -108,6 +108,8 @@ namespace GameLibrary.Client.ViewModels
 
         private async void OnSuccessfulSignUp(User user)
         {
+            await DisplayAlert("Success", $"Welcome, {user.UserName}!", "Ok");
+
             Preferences.Set("UserId", user.UserId);
             Preferences.Set("Username", user.UserName);
             Preferences.Set("Region", user.Region);

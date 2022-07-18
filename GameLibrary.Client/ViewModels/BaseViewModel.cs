@@ -47,5 +47,11 @@ namespace GameLibrary.Client.ViewModels
         {
             await Application.Current.MainPage.DisplayAlert(title, message, accept);
         }
+
+        // returns null if cancel is tapped
+        public async Task<string> DisplayPrompt(string title, string message)
+        {
+            return await Application.Current.MainPage.DisplayPromptAsync(title, message);
+        }
     }
 }

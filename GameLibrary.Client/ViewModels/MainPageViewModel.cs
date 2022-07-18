@@ -12,34 +12,10 @@ namespace GameLibrary.Client.ViewModels
     {
         int count = 0;
         public string BtnText { get; set; }
-        public ICommand OnCounterClicked { get { return new Command(() => OnClicked()); } }
 
         public MainPageViewModel(IDataService dataService)
         {
             DataService = dataService;
-        }
-
-        public async void OnClicked()
-        {
-            count++;
-
-            if (count == 1)
-                BtnText = $"Clicked {count} time";
-            else
-                BtnText = $"Clicked {count} times";
-            try
-            {
-                var resp = await DataService.Test();
-                var data = resp.ApiData;
-
-                BtnText = data.FirstOrDefault().UserName;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            RaisePropertyChanged(nameof(BtnText));
-            SemanticScreenReader.Announce(BtnText);
         }
     }
 }

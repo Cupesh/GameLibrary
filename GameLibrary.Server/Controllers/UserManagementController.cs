@@ -79,5 +79,28 @@ namespace GameLibrary.Server.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("SendPwdRecoveryEmail")]
+        public async Task<IActionResult> SendPwdRecoveryEmail(string email)
+        {
+            try
+            {
+                bool response = await _dataGameLibrary.CheckEmailForPwdRecovery(email);
+                if (response)
+                {
+                    // email service to send email
+                }
+                else
+                {
+                    return Ok(false);
+                }
+
+                return Ok(true);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

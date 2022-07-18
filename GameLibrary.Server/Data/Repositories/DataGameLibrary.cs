@@ -42,6 +42,24 @@ namespace GameLibrary.Server.Data.Repositories
             return result.First();
         }
 
+        public async Task<bool> CheckEmailForPwdRecovery(string email)
+        {
+            var sql = $"SELECT EmailAddress FROM tblUsers WHERE EmailAddress = @email";
+            var par = new { email = email };
+            var result = await _repository.GetDapperListAsync<string>(sql, par, CommandType.Text);
+
+            string? emailAddress = result.FirstOrDefault();
+            if(String.IsNullOrEmpty(emailAddress))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
         #endregion
 
         public async Task<List<Game>> Populate(Game game)

@@ -4,9 +4,8 @@
              x:Class="GameLibrary.Client.Pages.SignInPage"
              Shell.FlyoutBehavior="Disabled"
              Shell.TabBarIsVisible="False">
+    
     <Grid>
-
-
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*" />
@@ -40,6 +39,8 @@
                Aspect="AspectFill"
                Grid.Row="0"
                Grid.RowSpan="12"
+               Opacity="0.5"
+               IsOpaque="True"
                Grid.Column="0"
                Grid.ColumnSpan="12"/>
 
