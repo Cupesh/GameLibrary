@@ -1,14 +1,5 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Maui.Views;
-using GameLibrary.Client.Services;
+﻿using GameLibrary.Client.Services;
 using GameLibrary.Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GameLibrary.Client.ViewModels
@@ -56,6 +47,7 @@ namespace GameLibrary.Client.ViewModels
 
         public async void OnCreateProfile()
         {
+            if (!CanExecute()) { return; }
             ErrorMessage = string.Empty;
             if (!SignUpFormValidation()) { return; }
             Loading = true;
@@ -70,17 +62,13 @@ namespace GameLibrary.Client.ViewModels
                     {
                         await CreateUser();
                     }
-                    else
-                    {
-                        await DisplayAlert("", "This user name is already taken, Choose a different one.", "Ok");
-                    }
+                    else { await DisplayAlert("", "This user name is already taken, Choose a different one.", "Ok"); }
                 }
                 else { await DisplayAlert("Ooops...", $"{resp.ErrorMessage}", "Ok"); }
             }
             catch (Exception ex) { await DisplayAlert("Ooops...", $"{ex.Message}", "Ok"); }
 
             Loading = false;
-            return;
         }
 
         public async Task CreateUser()
@@ -104,7 +92,10 @@ namespace GameLibrary.Client.ViewModels
 
         public bool BackButtonPressed() => false;
 
-        public async void LoginClicked() { await Shell.Current.GoToAsync("signin"); }
+        public async void LoginClicked()
+        {
+            if (CanExecute()) { await Shell.Current.GoToAsync("signin"); }
+        }
 
         private async void OnSuccessfulSignUp(User user)
         {

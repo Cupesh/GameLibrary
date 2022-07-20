@@ -99,6 +99,7 @@
                 Grid.Column="3"
                 Grid.ColumnSpan="6"
                 Text="SIGN IN"
+                IsEnabled="{Binding Loading}"
                 Command="{Binding OnLoginClicked}">
 
         </Button>

@@ -143,6 +143,7 @@
                 Grid.Column="3"
                 Grid.ColumnSpan="6"
                 Text="CREATE"
+                IsEnabled="{Binding Loading}"
                 Command="{Binding OnCreateProfileClicked}">
 
         </Button>

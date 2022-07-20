@@ -12,6 +12,7 @@ namespace GameLibrary.Client.ViewModels
 {
     public class MainMenuViewModel : BaseViewModel
     {
+        public string SelectedConsole { get; set; } = "Name";
         public MainMenuViewModel(IDataService dataService)
         {
             DataService = dataService;

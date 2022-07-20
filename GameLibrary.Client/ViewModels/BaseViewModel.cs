@@ -12,6 +12,7 @@ namespace GameLibrary.Client.ViewModels
     {
         public INavigation Navigation { get; set; }
         public IDataService DataService { get; set; }
+        private DateTime LastClickDebouncer { get; set; }
         private bool loading;
         public bool Loading
         {
@@ -52,6 +53,14 @@ namespace GameLibrary.Client.ViewModels
         public async Task<string> DisplayPrompt(string title, string message)
         {
             return await Application.Current.MainPage.DisplayPromptAsync(title, message);
+        }
+
+        public bool CanExecute()
+        {
+            if (LastClickDebouncer.AddMilliseconds(1000) >= DateTime.Now)
+                return false;
+            LastClickDebouncer = DateTime.Now;
+            return true;
         }
     }
 }

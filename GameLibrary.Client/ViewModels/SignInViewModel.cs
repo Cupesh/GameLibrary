@@ -48,6 +48,7 @@ namespace GameLibrary.Client.ViewModels
 
         private async Task Login()
         {
+            if (!CanExecute()) { return; }
             Loading = true;
 
             try
@@ -76,6 +77,8 @@ namespace GameLibrary.Client.ViewModels
 
         private async Task ForgotPasswordClicked()
         {
+            if (!CanExecute()) { return; }
+
             string email = await DisplayPrompt("Enter email address", "If there is an email address associated with your profile " +
                 "you will receive an email with steps on how to reset your password");
 
