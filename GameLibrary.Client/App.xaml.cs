@@ -8,7 +8,7 @@ namespace GameLibrary.Client
         {
             InitializeComponent();
 
-            Preferences.Clear();
+            //Preferences.Clear();
 
             if (DeviceInfo.Idiom == DeviceIdiom.Phone)
                 Shell.Current.CurrentItem = PhoneTabs;

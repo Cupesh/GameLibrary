@@ -1,4 +1,4 @@
-﻿using GameLibrary.Server.Models;
+﻿using GameLibrary.Shared.Models;
 using HtmlAgilityPack;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -14,7 +14,7 @@ namespace GameLibrary.Server
             return doc;
         }
 
-        public static List<Game> GetGameData(string url)
+        public static List<PSXGame> GetGameData(string url)
         {
             //List<Game> games = new();
             //List<string> links = new();
@@ -32,14 +32,14 @@ namespace GameLibrary.Server
             //string json = JsonSerializer.Serialize<List<string>>(links);
             //File.WriteAllText(@"C:\links.json", json);
 
-            List<Game> games = new List<Game>();
+            List<PSXGame> games = new List<PSXGame>();
             List<string> links = JsonSerializer.Deserialize<List<string>>(File.ReadAllText(@"C:\links.json"));
 
             foreach (var l in links)
             {
                 HtmlDocument document = GetDocument(l);
 
-                Game game = new();
+                PSXGame game = new();
 
                 var nodes = document.DocumentNode.SelectNodes("//table[@id = \"table4\"]//tr//td[2]");
 
@@ -74,9 +74,9 @@ namespace GameLibrary.Server
                 game.LinkCableFunction = Regex.Replace(document.DocumentNode.SelectSingleNode("//table[@id= \"table19\"]//tr[9]//td[2]").InnerText ?? "", @"\t|\n|\r|&nbsp;|-&nbsp;", "").Trim();
 
                 games = new();
-                games = JsonSerializer.Deserialize<List<Game>>(File.ReadAllText(@"C:\games.json"));
+                games = JsonSerializer.Deserialize<List<PSXGame>>(File.ReadAllText(@"C:\games.json"));
                 games.Add(game);
-                string gamesJson = JsonSerializer.Serialize<List<Game>>(games);
+                string gamesJson = JsonSerializer.Serialize<List<PSXGame>>(games);
                 File.WriteAllText(@"C:\games.json", gamesJson);
 
             }

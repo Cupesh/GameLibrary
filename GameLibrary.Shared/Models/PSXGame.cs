@@ -1,6 +1,10 @@
-﻿namespace GameLibrary.Server.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace GameLibrary.Shared.Models
 {
-    public class Game
+    public class PSXGame
     {
         public string OfficialTitle { get; set; }
         public string CommonTitle { get; set; }

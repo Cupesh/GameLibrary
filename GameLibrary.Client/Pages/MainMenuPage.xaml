@@ -2,13 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GameLibrary.Client.Pages.MainMenuPage">
-    <Grid>
+    <Grid Margin="10, 10"
+          ColumnSpacing="5"
+          RowSpacing="5"
+          >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -30,53 +29,45 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Picker Grid.Row="1"
-                Grid.Column="1"
-                Grid.ColumnSpan="3"
-                Grid.RowSpan="1"
-                TitleColor="WhiteSmoke"
-                x:Name="searchMethod"
-                SelectedItem="{Binding SelectedConsole}"
-                FontSize="18"
-                VerticalTextAlignment="End">
+        <Entry Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="10"
+               Placeholder="Enter game title or scan a barcode..."
+               PlaceholderColor="LightGray"
+               FontSize="Medium"
+               VerticalOptions="End"
+               VerticalTextAlignment="End"
+               Text="{Binding SearchText}">
+            
+        </Entry>
 
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Name</x:String>
-                    <x:String>SLUS</x:String>
-                    <x:String>Barcode</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
-
-        <Entry Grid.Row="1"
-               Grid.Column="4"
-               Grid.RowSpan="1"
-               Grid.ColumnSpan="9"
-               Placeholder="..."
-               VerticalTextAlignment="End" />
-
-        <Button Grid.Row="3"
-                Grid.Column="1"
+        <Button Grid.Row="1"
+                Grid.Column="0"
                 Grid.ColumnSpan="4"
                 Text="SCAN"
-                CornerRadius="1"
-                BorderColor="White"
-                FontSize="14" />
+                CornerRadius="5"
+                BorderColor="{StaticResource PSConPurpleBlue}"
+                FontSize="Large"
+                TextColor="{StaticResource PSConPurpleBlue} "/>
 
-        <Button Grid.Row="3"
-                Grid.Column="9"
+        <Button Grid.Row="1"
+                Grid.Column="6"
                 Grid.ColumnSpan="4"
-                CornerRadius="1"
-                BorderColor="White"
-                Text="Search"
-                FontSize="14" />
+                CornerRadius="5"
+                BorderColor="{StaticResource PSConGreen}"
+                TextColor="{StaticResource PSConGreen}"
+                Text="FIND GAME"
+                FontSize="Medium"
+                Command="{Binding OnFindGameClicked}"/>
+
+        <Label Grid.Row="2"
+               Grid.Column="0"
+               Grid.ColumnSpan="10"
+               FontSize="Small"
+               TextColor="Red"
+               Text="{Binding ErrorMessage}" />
 
     </Grid>
 </ContentPage>

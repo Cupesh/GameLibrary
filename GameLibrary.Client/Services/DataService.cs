@@ -45,5 +45,15 @@ namespace GameLibrary.Client.Services
         }
 
         #endregion
+
+        #region GameQueries
+
+        public async Task<ApiResponse<List<PSXGame>>> FindGamesBySearchText(string searchText)
+        {
+            string url = $"GameQueries/FindGamesBySearchText?searchText={searchText}";
+            return await _client.GetDataAsync<List<PSXGame>>(url);
+        }
+
+        #endregion
     }
 }

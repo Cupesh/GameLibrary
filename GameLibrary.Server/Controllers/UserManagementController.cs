@@ -1,5 +1,4 @@
 ﻿using GameLibrary.Server.Data.Repositories;
-using GameLibrary.Server.Models;
 using GameLibrary.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using NETCore.Encrypt;

@@ -1,5 +1,4 @@
-﻿using GameLibrary.Server.Models;
-using GameLibrary.Shared.Models;
+﻿using GameLibrary.Shared.Models;
 
 namespace GameLibrary.Server.Data.Repositories
 {
@@ -14,6 +13,12 @@ namespace GameLibrary.Server.Data.Repositories
 
         #endregion
 
-        Task<List<Game>> Populate(Game game);
+        #region Game queries
+
+        Task<List<PSXGame>> FindGamesBySearchText(string searchText);
+
+        #endregion
+
+        Task<List<PSXGame>> Populate(PSXGame game);
     }
 }

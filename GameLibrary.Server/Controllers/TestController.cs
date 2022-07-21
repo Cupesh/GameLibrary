@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using GameLibrary.Server.Data.Repositories;
 using GameLibrary.Server.Models;
 using System.Text.Json;
+using GameLibrary.Shared.Models;
 
 namespace GameLibrary.Server.Controllers
 {
@@ -22,7 +23,7 @@ namespace GameLibrary.Server.Controllers
         {
             try
             {
-                List<Game> games = JsonSerializer.Deserialize<List<Game>>(System.IO.File.ReadAllText(@"C:\games.json"));
+                List<PSXGame> games = JsonSerializer.Deserialize<List<PSXGame>>(System.IO.File.ReadAllText(@"C:\games.json"));
 
                 foreach(var game in games)
                 {
