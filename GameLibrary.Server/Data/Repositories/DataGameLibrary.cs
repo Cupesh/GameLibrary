@@ -66,7 +66,7 @@ namespace GameLibrary.Server.Data.Repositories
 
         public async Task<List<PSXGame>> FindGamesBySearchText(string searchText)
         {
-            var sql = $"SELECT * FROM tblPSXGamesPAL WHERE (OfficialTitle LIKE '%@searchText%') OR (CommonTitle LIKE '%@searchText%')";
+            var sql = $"SELECT * FROM tblPSXGamesPAL WHERE Language = 'English' AND (OfficialTitle LIKE '%' + @searchText + '%' OR CommonTitle LIKE '%' + @searchText +'%')";
             var par = new { searchText = searchText };
             var result = await _repository.GetDapperListAsync<PSXGame>(sql, par, CommandType.Text);
 

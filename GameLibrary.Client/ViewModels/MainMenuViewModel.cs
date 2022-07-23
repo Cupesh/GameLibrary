@@ -3,6 +3,7 @@ using GameLibrary.Shared.Models;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,19 @@ namespace GameLibrary.Client.ViewModels
     public class MainMenuViewModel : BaseViewModel
     {
         public string SearchText { get; set; }
+        public string SearchResultText { get; set; }
+        public ObservableCollection<PSXGame> searchResultGamesList = new();
+        public ObservableCollection<PSXGame> SearchResultGamesList
+        {
+            get => searchResultGamesList;
+            set
+            {
+                searchResultGamesList = value;
+                RaisePropertyChanged(nameof(searchResultGamesList));
+            }
+        }
 
-        public ICommand OnFindGameClicked { get { return new Command(() => FindGame()); } }
+        public ICommand OnFindGameClicked { get { return new Command(async() => await FindGame()); } }
 
         public MainMenuViewModel(IDataService dataService)
         {
@@ -48,7 +60,16 @@ namespace GameLibrary.Client.ViewModels
                 var resp = await DataService.FindGamesBySearchText(SearchText);
                 if (resp.IsSuccess)
                 {
+                    var games = resp.ApiData;
+                    SearchResultText = games.Count == 1 ? $"-- 1 result --" : $"-- {games.Count} results --";
+                    RaisePropertyChanged(nameof(SearchResultText));
 
+                    foreach (var game in games)
+                    {
+                        SearchResultGamesList.Add(game);
+                    }
+
+                    RaisePropertyChanged(nameof(SearchResultGamesList));
                 }
                 else { await DisplayAlert("Ooops...", $"{resp.ErrorMessage}", "Ok"); }
             }

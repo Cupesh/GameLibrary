@@ -68,6 +68,16 @@
                FontSize="Small"
                TextColor="Red"
                Text="{Binding ErrorMessage}" />
+        
+        <Picker Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="10"
+                Title="{Binding SearchResultText}"
+                HorizontalTextAlignment="Center"
+                ItemsSource="{Binding SearchResultGameList}"
+                ItemDisplayBinding="{Binding OfficialTitle}">
+            
+        </Picker>
 
     </Grid>
 </ContentPage>

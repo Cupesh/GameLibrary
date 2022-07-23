@@ -20,14 +20,7 @@ namespace GameLibrary.Server.Controllers
             try
             {
                 List<PSXGame> games = await _dataGameLibrary.FindGamesBySearchText(searchText);
-                if (games.Count > 0)
-                {
-                    return Ok(games);
-                }
-                else
-                {
-                    return NotFound();
-                }
+                return Ok(games);
             }
             catch (Exception ex)
             {
